@@ -1,86 +1,85 @@
-
 #Creating Database CONFERENCE_REVIEW
 CREATE DATABASE CONFERENCE_REVIEW ;
 USE CONFERENCE_REVIEW;
 
-#Creating Author Table with EmailAddr as PK
+#Creating Author Table with emailAddr as PK
 CREATE TABLE Author (
-	EmailAddr VARCHAR(255) PRIMARY KEY,
-	FirstName VARCHAR(255) NOT NULL,
-	LastName VARCHAR(255) NOT NULL
+	emailAddr VARCHAR(255) PRIMARY KEY,
+	firstName VARCHAR(255) NOT NULL,
+	lastName VARCHAR(255) NOT NULL
 );
 
 #Creating Paper with id as PK
 CREATE TABLE Paper (
-	Id INT PRIMARY KEY AUTO_INCREMENT,
-	Title VARCHAR(255) NOT NULL,
-	Absrract TEXT,
-	FileName VARCHAR(255) NOT NULL
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(255) NOT NULL,
+	absrract TEXT,
+	fileName VARCHAR(255) NOT NULL
 );
 
-#Creating Reviewer Table with EmailAddr as PK
+#Creating Reviewer Table with emailAddr as PK
 CREATE TABLE Reviewer (
-	EmailAddr VARCHAR(255) PRIMARY KEY,
-	FirstName VARCHAR(255) NOT NULL,
-	LastName VARCHAR(255) NOT NULL,
-	AuthorFeedBack TEXT,
-	CommiteeFeedBack TEXT,
-	PhoneNum VARCHAR(13) NOT NULL,
-	Affiliation VARCHAR(255) NOT NULL
+	emailAddr VARCHAR(255) PRIMARY KEY,
+	firstName VARCHAR(255) NOT NULL,
+	lastName VARCHAR(255) NOT NULL,
+	authorFeedBack TEXT,
+	commiteeFeedBack TEXT,
+	phoneNum VARCHAR(13) NOT NULL,
+	affiliation VARCHAR(255) NOT NULL
 );
 
 #Creating Topic Table with id as PK
 CREATE TABLE Topic (
-	Id INT PRIMARY KEY AUTO_INCREMENT,
-	TopicName VARCHAR(255) NOT NULL
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	topicName VARCHAR(255) NOT NULL
 );
 
 #Creating weak entity Review Table with id as PK
 CREATE TABLE Review (
-	Id INT PRIMARY KEY AUTO_INCREMENT,
-	Recommendation TEXT,
-	MeritScore TINYINT NOT NULL,
-	ReadabilityScore TINYINT NOT NULL,
-	RelevanceScore TINYINT NOT NULL,	
-	OriginalityScore TINYINT NOT NULL,
-	PaperId INT NOT NULL,
-	ReviewerId VARCHAR(255) NOT NULL,
-	FOREIGN KEY (PaperId) REFERENCES Paper (Id),
-	FOREIGN KEY (ReviewerId) REFERENCES Reviewer (EmailAddr)
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	recommendation TEXT,
+	meritScore TINYINT NOT NULL,
+	readabilityScore TINYINT NOT NULL,
+	relevanceScore TINYINT NOT NULL,
+	originalityScore TINYINT NOT NULL,
+	paperid INT NOT NULL,
+	reviewerid VARCHAR(255) NOT NULL,
+	FOREIGN KEY (paperid) REFERENCES Paper (id),
+	FOREIGN KEY (reviewerid) REFERENCES Reviewer (emailAddr)
 );
 
 #Create Submit Relation between Author and Paper tables
 CREATE TABLE Author_Submit_Paper(
-	AuthorId VARCHAR(255) NOT Null,
-	PaperId INT NOT Null,
-	FOREIGN KEY (AuthorId) REFERENCES Author (EmailAddr),
-	FOREIGN KEY (PaperId) REFERENCES Paper (Id),
-	UNIQUE(PaperId),
-	UNIQUE(AuthorId)
+	authorid VARCHAR(255) NOT Null,
+	paperid INT NOT Null,
+	FOREIGN KEY (authorid) REFERENCES Author (emailAddr),
+	FOREIGN KEY (paperid) REFERENCES Paper (id),
+	UNIQUE(paperid),
+	UNIQUE(authorid)
 );
 
 #Create Submit Relation between Paper and Reviewer
 CREATE TABLE Paper_Assigned_Reviewer(
-	ReviewerId VARCHAR(255) NOT Null,
-	PaperId INT NOT Null,
-	FOREIGN KEY (ReviewerId) REFERENCES Reviewer (EmailAddr),
-	FOREIGN KEY (PaperId) REFERENCES Paper (Id)
+	reviewerid VARCHAR(255) NOT Null,
+	paperid INT NOT Null,
+	FOREIGN KEY (reviewerid) REFERENCES Reviewer (emailAddr),
+	FOREIGN KEY (paperid) REFERENCES Paper (id)
 );
 
 #Create Has Relation between Reviewer and Topic
 CREATE TABLE Reviewer_Has_Topic(
-	ReviewerId VARCHAR(255) NOT Null,
-	TopicId INT NOT Null,
-	FOREIGN KEY (ReviewerId) REFERENCES Reviewer (EmailAddr),
-	FOREIGN KEY (TopicId) REFERENCES Topic (Id),
-	UNIQUE(TopicId)
+	reviewerid VARCHAR(255) NOT Null,
+	topicid INT NOT Null,
+	FOREIGN KEY (reviewerid) REFERENCES Reviewer (emailAddr),
+	FOREIGN KEY (topicid) REFERENCES Topic (id),
+	UNIQUE(topicid)
 );
 
 #Create Submit Relation between Reviewer and Review
 CREATE TABLE Reviewer_Submit_Review(
-	ReviewerId VARCHAR(255) NOT Null,
-	ReviewId INT NOT Null,
-	FOREIGN KEY (ReviewerId) REFERENCES Reviewer (EmailAddr),
-	FOREIGN KEY (ReviewId) REFERENCES Review (Id),
-	UNIQUE(ReviewId)
+	reviewerid VARCHAR(255) NOT Null,
+	reviewid INT NOT Null,
+	FOREIGN KEY (reviewerid) REFERENCES Reviewer (emailAddr),
+	FOREIGN KEY (reviewid) REFERENCES Review (id),
+	UNIQUE(reviewid)
 );
