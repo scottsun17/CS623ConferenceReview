@@ -1,9 +1,9 @@
 # CS612ConferenceReview
-## Database Design
-![alt text](https://raw.githubusercontent.com/scottsun17/CS612ConferenceReview/master/confrenece/src/img/confrence_ER-Diagram.jpg)
+## Database Design - PART 1
+![alt text](https://raw.githubusercontent.com/scottsun17/CS623ConferenceReview/master/img/confrence_ER-Diagram.jpg)
 * Database is created based on the ER diagram provided by Prof. Teresa Brooks from Pace University
 
-## How to load the script
+## How to load the script - PART 1
 * Open terminal
 * Start MySQL
 * Copy and Paste in the script from CONFERENCE_REVIEW.sql - this will create the database and tables for you
