@@ -8,7 +8,7 @@ author
 paper
 review - referential integrity constraint
 reviewer - referential integrity constraint
-topic - referential integrity constraint
+topic
 ```
 
 ## Application Design
